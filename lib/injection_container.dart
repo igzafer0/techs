@@ -4,5 +4,5 @@ import 'package:techs/config/source_manager/network_source_manager.dart';
 final locator = GetIt.instance;
 
 void init() {
-    locator.registerLazySingleton(() => NetworkSourceManager());
+  locator.registerLazySingleton(() => NetworkSourceManager());
 }
