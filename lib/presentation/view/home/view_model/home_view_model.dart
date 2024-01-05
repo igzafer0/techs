@@ -14,8 +14,6 @@ abstract class _HomeViewModelBase with Store, CoreViewModel {
 
   @override
   void init() {
-    debugPrint("açıldım");
-
     _blogUseCase = locator<BlogUseCase>();
     _getBlog();
   }

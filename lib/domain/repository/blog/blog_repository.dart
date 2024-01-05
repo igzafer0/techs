@@ -1,5 +1,5 @@
-import 'package:techs/data/dto/blog_model/blog_model.dart';
+import 'package:techs/domain/entity/blog_entity/blog_entity.dart';
 
 abstract class BlogRepository {
-  Future<BlogModel> getBlog();
+  Future<BlogEntity> getBlog();
 }
