@@ -23,11 +23,16 @@ dependencies:
   mobx_codegen: ^2.1.1
   build_runner: ^2.3.3
 
+  provider: ^6.0.5
+
   xml2json: ^6.2.2
   json_serializable: ^6.6.1
   json_annotation: ^4.8.1
 
   cupertino_icons: ^1.0.2
+
+  gap: ^3.0.0
+
 
 dev_dependencies:
   flutter_test:
@@ -40,5 +45,26 @@ flutter:
 
 
   uses-material-design: true
+  fonts:
+  - family: Encode
+    fonts:
+      - asset: asset/font/encode/encode-black.ttf
+        weight: 900
+      - asset: asset/font/encode/encode-extra-bold.ttf
+        weight: 800
+      - asset: asset/font/encode/encode-bold.ttf
+        weight: 700
+      - asset: asset/font/encode/encode-semi-bold.ttf
+        weight: 600
+      - asset: asset/font/encode/encode-medium.ttf
+        weight: 500
+      - asset: asset/font/encode/encode-regular.ttf
+        weight: 400
+      - asset: asset/font/encode/encode-light.ttf
+        weight: 300
+      - asset: asset/font/encode/encode-thin.ttf
+        weight: 200
+      - asset: asset/font/encode/encode-extra-light.ttf
+        weight: 100
 
 

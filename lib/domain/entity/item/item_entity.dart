@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 final class ItemEntity {
-  final int id;
+  final String id;
   final String title;
   final ImageEntity image;
   final Uri link;

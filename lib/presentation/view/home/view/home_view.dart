@@ -4,6 +4,8 @@ import 'package:techs/config/core_presentation/core_view.dart';
 import 'package:techs/presentation/view/home/view_model/home_view_model.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+import 'package:techs/util/extension/context_extension.dart';
+
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
@@ -24,16 +26,23 @@ class _HomeViewState extends CoreState<HomeView> {
         viewModel = model;
       },
       onPageBuilder: (context, value) => Scaffold(
-        body: Observer(builder: (context) {
-          if (viewModel.blogEntity == null) {
-            return const SizedBox.shrink();
-          }
-          return ListView.builder(
-              itemCount: viewModel.blogEntity?.item.length,
-              itemBuilder: (context, index) {
-                return Text("${viewModel.blogEntity?.item[index].title}");
-              });
-        }),
+        body: SafeArea(
+          child: Observer(builder: (context) {
+            if (viewModel.blogEntity == null) {
+              return const SizedBox.shrink();
+            }
+            return ListView.builder(
+                padding: context.midSpacerOnlyTop,
+                itemCount: viewModel.blogEntity?.item.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: context.midSpacerOnlyHorizontal,
+                    margin: context.midSpacerOnlyBottom,
+                    child: viewModel.widgetMixer(index),
+                  );
+                });
+          }),
+        ),
       ),
     );
   }
