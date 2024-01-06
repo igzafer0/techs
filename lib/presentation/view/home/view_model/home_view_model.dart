@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:techs/config/core_presentation/core_view_model.dart';
+import 'package:techs/domain/entity/blog/blog_entity.dart';
 import 'package:techs/domain/usecase/blog/blog_usecase.dart';
 import 'package:techs/injection_container.dart';
 part 'home_view_model.g.dart';
@@ -23,8 +24,11 @@ abstract class _HomeViewModelBase with Store, CoreViewModel {
     viewModelContext = context;
   }
 
+  @observable
+  BlogEntity? blogEntity;
+
+  @action
   _getBlog() async {
-    var result = await _blogUseCase.blog();
-    debugPrint(" ${result.title}");
+    blogEntity = await _blogUseCase.blog();
   }
 }
