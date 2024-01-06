@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 final class ItemEntity {
   final String id;
   final String title;
+  final String authorTitle;
   final ImageEntity image;
   final Uri link;
-  const ItemEntity(this.id, this.title, this.image, this.link);
+  const ItemEntity(this.id, this.title, this.authorTitle, this.image, this.link);
 }
 
 @immutable

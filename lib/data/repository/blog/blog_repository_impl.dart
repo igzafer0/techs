@@ -5,8 +5,7 @@ import 'package:techs/injection_container.dart';
 
 class BlogRepositoryImpl implements BlogRepository {
   @override
-  Future<BlogEntity> getBlog() async {
-    var result = await locator<BlogRemoteDataSource>().getBlog();
-    return result.toEntity();
+  Future<BlogEntity> getBlog(String url) async {
+    return await locator<BlogRemoteDataSource>().getBlog(url).then((value) => value.toEntity());
   }
 }

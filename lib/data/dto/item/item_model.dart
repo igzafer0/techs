@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:techs/domain/entity/item/item_entity.dart';
 part "item_model.g.dart";
@@ -10,14 +9,15 @@ class ItemModel {
   dynamic id;
   String? title;
   ImageModel? image;
+  String? authorTitle;
   Uri? link;
   ItemModel({this.id, this.title, this.image, this.link});
   factory ItemModel.fromJson(Map<String, dynamic> json) => _$ItemModelFromJson(json);
   ItemEntity toEntity() {
-    debugPrint("this $id ${DateTime.now().millisecondsSinceEpoch.toString()}");
     return ItemEntity(
       id == null ? (Random().nextInt(58725) + 30000).toString() : id.toString(),
       title ?? "",
+      authorTitle ?? "",
       image != null ? image!.toEntity() : ImageModel().toEntity(),
       link ?? Uri(),
     );

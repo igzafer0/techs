@@ -33,12 +33,15 @@ class _HomeViewState extends CoreState<HomeView> {
             }
             return ListView.builder(
                 padding: context.midSpacerOnlyTop,
-                itemCount: viewModel.blogEntity?.item.length,
+                itemCount: viewModel.blogEntity?.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    padding: context.midSpacerOnlyHorizontal,
-                    margin: context.midSpacerOnlyBottom,
-                    child: viewModel.widgetMixer(index),
+                  return GestureDetector(
+                    onTap: () => debugPrint("${viewModel.blogEntity![index].link}"),
+                    child: Container(
+                      padding: context.midSpacerOnlyHorizontal,
+                      margin: context.midSpacerOnlyBottom,
+                      child: viewModel.widgetMixer(index),
+                    ),
                   );
                 });
           }),

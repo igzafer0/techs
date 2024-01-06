@@ -13,8 +13,16 @@ class BlogModel {
 
   factory BlogModel.fromJson(Map<String, dynamic> json) => _$BlogModelFromJson(json);
 
-  BlogEntity toEntity() =>
-      BlogEntity(title ?? "", item != null ? item!.map((e) => e.toEntity()).toList() : [ItemModel().toEntity()]);
+  BlogEntity toEntity() {
+    if (item != null) {
+      for (var element in item!) {
+        element.authorTitle = title ?? "";
+      }
+      var newItem = item!.map((e) => e.toEntity()).toList();
+      return BlogEntity(title ?? "", newItem);
+    }
+    return BlogEntity(title ?? "", [ItemModel().toEntity()]);
+  }
 
   Map<String, dynamic> toJson() => _$BlogModelToJson(this);
 }

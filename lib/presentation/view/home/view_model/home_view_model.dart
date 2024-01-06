@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:techs/config/core_presentation/core_view_model.dart';
-import 'package:techs/domain/entity/blog/blog_entity.dart';
+import 'package:techs/domain/entity/item/item_entity.dart';
 import 'package:techs/domain/usecase/blog/blog_usecase.dart';
 import 'package:techs/injection_container.dart';
 import 'package:techs/presentation/view/widget/blog_card/blog_card_only_title.dart';
@@ -28,30 +28,35 @@ abstract class _HomeViewModelBase with Store, CoreViewModel {
   }
 
   @observable
-  BlogEntity? blogEntity;
+  List<ItemEntity>? blogEntity;
 
   @action
   _getBlog() async {
-    blogEntity = await _blogUseCase.blog();
+    var donanim = await _blogUseCase.blog("https://www.donanimhaber.com/rss/tum/");
+    var webtekno = await _blogUseCase.blog("https://feeds.feedburner.com/webteknocom");
+    var shiftdelete = await _blogUseCase.blog("https://shiftdelete.net/feed");
+    var evrimagaci = await _blogUseCase.blog("https://evrimagaci.org/rss.xml");
+    blogEntity = donanim.item;
+    blogEntity!.addAll(webtekno.item);
+    blogEntity!.addAll(shiftdelete.item);
+    blogEntity!.addAll(evrimagaci.item);
+    blogEntity!.shuffle();
   }
 
   Widget widgetMixer(int index) {
-    if (blogEntity!.item[index].image.url.isEmpty) {
-      var result = int.tryParse(blogEntity!.item[index].id)! % 2;
-      return switch (result) {
-        0 => BlogCardOnlyTitle(title: blogEntity!.item[index].title),
-        1 => BlogCardWithoutImage(title: blogEntity!.item[index].title, author: blogEntity!.title),
-        _ => BlogCardOnlyTitle(title: blogEntity!.item[index].title),
-      };
-    }
-    var result = int.tryParse(blogEntity!.item[index].id)! % 5;
+    var result = int.tryParse(blogEntity![index].id)! % 3;
+    debugPrint("test $result");
     return switch (result) {
-      0 => BlogCardOnlyTitle(title: blogEntity!.item[index].title),
+      0 => BlogCardOnlyTitle(title: blogEntity![index].title),
       1 => BlogCardWithImage(
-          imageUrl: blogEntity!.item[index].image.url, title: blogEntity!.item[index].title, author: blogEntity!.title),
-      2 => BlogCardWithoutImage(title: blogEntity!.item[index].title, author: blogEntity!.title),
+          imageUrl: blogEntity![index].image.url,
+          title: blogEntity![index].title,
+          author: blogEntity![index].authorTitle),
+      2 => BlogCardWithoutImage(title: blogEntity![index].title, author: blogEntity![index].authorTitle),
       _ => BlogCardWithImage(
-          imageUrl: blogEntity!.item[index].image.url, title: blogEntity!.item[index].title, author: blogEntity!.title),
+          imageUrl: blogEntity![index].image.url,
+          title: blogEntity![index].title,
+          author: blogEntity![index].authorTitle),
     };
   }
 }

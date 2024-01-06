@@ -13,13 +13,13 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
       Atom(name: '_HomeViewModelBase.blogEntity', context: context);
 
   @override
-  BlogEntity? get blogEntity {
+  List<ItemEntity>? get blogEntity {
     _$blogEntityAtom.reportRead();
     return super.blogEntity;
   }
 
   @override
-  set blogEntity(BlogEntity? value) {
+  set blogEntity(List<ItemEntity>? value) {
     _$blogEntityAtom.reportWrite(value, super.blogEntity, () {
       super.blogEntity = value;
     });
